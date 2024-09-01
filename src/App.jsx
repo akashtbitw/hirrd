@@ -1,53 +1,58 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './App.css'
-import { Button } from './components/ui/button'
-import AppLayout from './layout/layout'
-import LandingPage from './pages/landing'
-import Onboarding from './pages/onboarding'
-import JobListing from './pages/job-listing'
-import JobPage from './pages/job'
-import PostJob from './pages/post-job'
-import SavedJobs from './pages/saved-jobs'
-import MyJobs from './pages/my-jobs'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+import { Button } from "./components/ui/button";
+import AppLayout from "./layout/layout";
+import LandingPage from "./pages/landing";
+import Onboarding from "./pages/onboarding";
+import JobListing from "./pages/job-listing";
+import JobPage from "./pages/job";
+import PostJob from "./pages/post-job";
+import SavedJobs from "./pages/saved-jobs";
+import MyJobs from "./pages/my-jobs";
+import { ThemeProvider } from "./components/theme-provider";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout/>,
+    element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <LandingPage/>
+        element: <LandingPage />,
       },
       {
         path: "/onboarding",
-        element: <Onboarding/>
+        element: <Onboarding />,
       },
       {
         path: "/jobs",
-        element: <JobListing/>
+        element: <JobListing />,
       },
       {
         path: "/job/:id",
-        element: <JobPage/>
+        element: <JobPage />,
       },
       {
         path: "/post-job",
-        element: <PostJob/>
+        element: <PostJob />,
       },
       {
         path: "/saved-jobs",
-        element: <SavedJobs/>
+        element: <SavedJobs />,
       },
       {
         path: "/my-jobs",
-        element: <MyJobs/>
-      }
-    ]
-  }
-])
+        element: <MyJobs />,
+      },
+    ],
+  },
+]);
 function App() {
-  return <RouterProvider router={router}/>
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
