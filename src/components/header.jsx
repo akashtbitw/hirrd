@@ -31,7 +31,7 @@ const Header = () => {
     <>
       <nav className="p-4 flex justify-between items-center">
         <Link to="/">
-          <img className="h-20 " src="logo.png" alt="Hirrd Logo" />
+          <img className="h-20 " src="/logo.png" alt="Hirrd Logo" />
         </Link>
         <div className="flex gap-8">
           <SignedOut>

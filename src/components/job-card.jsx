@@ -38,7 +38,7 @@ const JobCard = ({
     }
   }, [savedJobs]);
   return (
-    <Card>
+    <Card className="flex flex-col">
       <CardHeader>
         <CardTitle className="flex justify-between from-bold">
           {job.title}
