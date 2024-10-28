@@ -1,4 +1,4 @@
-import supabaseClient from "@/utils/supabase";
+import supabaseClient, { supabaseUrl } from "@/utils/supabase";
 
 export async function getCompanies(token) {
   const supabase = await supabaseClient(token);
@@ -21,7 +21,8 @@ export async function addNewCompany(token, _, companyData) {
     .from("company-logo")
     .upload(fileName, companyData.logo);
 
-  if (storageError) throw new Error("Error uploading Company Logo");
+  if (storageError)
+    throw new Error("Error uploading Company Logo:", storageError);
 
   const logo_url = `${supabaseUrl}/storage/v1/object/public/company-logo/${fileName}`;
 
@@ -30,7 +31,7 @@ export async function addNewCompany(token, _, companyData) {
     .insert([
       {
         name: companyData.name,
-        logo_url: logo_url,
+        logo_URL: logo_url,
       },
     ])
     .select();
