@@ -16,8 +16,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useUser } from "@clerk/clerk-react";
 
 const LandingPage = () => {
+  const { user } = useUser();
   return (
     <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20">
       <section className="text-center">
@@ -32,26 +34,29 @@ const LandingPage = () => {
             />
           </span>
         </h1>
-        <p className="to-gray-300 sm:mt-4 text-xs sm:text-xl">
+        <p className="to-gray-300 sm:mt-4 text-md sm:text-xl">
           Explore thousands of job listings or find the perfect candidate
         </p>
       </section>
-      <div className="flex justify-center gap-6">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
         <Link to="/jobs">
-          <Button variant="blue" size="xl">
+          <Button variant="blue" size="xl" className="w-60 sm:w-auto">
             Find Jobs
           </Button>
         </Link>
-        <Link to="/post-job">
-          <Button variant="destructive" size="xl">
-            Post a Job
-          </Button>
-        </Link>
+        {(!user || user?.unsafeMetadata?.role === "recruiter") && (
+          <Link to="/post-job">
+            <Button variant="destructive" size="xl" className="w-60 sm:w-auto">
+              Post a Job
+            </Button>
+          </Link>
+        )}
       </div>
+
       {/* carousel */}
       <Carousel
         plugins={[React.useRef(Autoplay({ delay: 2000 })).current]}
-        className="w-full py-10"
+        className="w-full py-10 -z-10"
       >
         <CarouselContent className="flex gap-5 sm:gap-20 items-center">
           {companies.map(({ name, id, path }) => {

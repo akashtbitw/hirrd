@@ -44,7 +44,7 @@ const Header = () => {
               <Link to="/post-job">
                 <Button variant="destructive" className="rounded-full">
                   <PenBox size={20} className="mr-2" />
-                  Post a Job
+                  <span className="hidden sm:inline">Post a Job</span>
                 </Button>
               </Link>
             )}
@@ -57,7 +57,11 @@ const Header = () => {
             >
               <UserButton.MenuItems>
                 <UserButton.Link
-                  label="My Jobs"
+                  label={
+                    user?.unsafeMetadata?.role == "candidate"
+                      ? "My Applications"
+                      : "My Jobs"
+                  }
                   labelIcon={<BriefcaseBusiness size={15} />}
                   href="/my-jobs"
                 />
